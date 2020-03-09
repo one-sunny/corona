@@ -1,290 +1,435 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>corona not beer</title>
-		<meta property="og:image" content="http://13.58.243.149/corona/corona.jpg"/>
-		<meta property="og:url" content="http://13.58.243.149/corona/report"/>
-		<meta property="og:description" content="corona daily report-confirmed,deaths,recovery"/>
-		<meta property="og:title" content="Corona Not Beer"/>
 
-		<style>
-			table{border:1px solid #444;border-collapse:collapse;margin-top:30px;width:100%;}
-			th,td{border:1px solid #ccc;padding:10px; word-break: break-all;font-size:10px;}
-			td.red{color:red}
-			td.blue{color:blue;}
-			h3{margin-top:50px;}
-			select{border:none;border:1px solid #ccc;border-radius:5px;background:#fff;padding:12px 10px;width:100%;box-sizing:border-box;font-size:16px;}
-			.colors{overflow: hidden;margin-bottom:20px;}
-			.colors .color{display: inline-block;border-radius: 50%;width:10px;height:10px;margin-right:5px;}
-			.colors .color.red{background:#EB7F75}
-			.colors .color.yellow{background:#FFDC73}
-			.colors .color.blue{background:#8FDAFF}
-			.colors .label{display: inline-block;margin-right:10px;font-size:12px;color:#333;}
-		</style>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-116931667-5"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>corona not beer</title>
+	<meta property="og:image" content="http://13.58.243.149/corona/corona.jpg" />
+	<meta property="og:url" content="http://13.58.243.149/corona/report" />
+	<meta property="og:description" content="corona daily report-confirmed,deaths,recovery" />
+	<meta property="og:title" content="Corona Not Beer" />
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-		  gtag('config', 'UA-116931667-5');
-		</script>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<style>
+		table {
+			border: 1px solid #444;
+			border-collapse: collapse;
+			margin-top: 30px;
+			width: 100%;
+		}
 
-	</head>
-	<body>
-		<div id="columnchart_confirmed" ></div>
-		<div id="linechart_confirmed_increase" ></div>
-		<div id="columnchart_death" ></div>
-		<div id="columnchart_recovered" ></div>
+		th,
+		td {
+			border: 1px solid #ccc;
+			padding: 10px;
+			word-break: break-all;
+			font-size: 10px;
+			text-align: center;
+		}
+		td{font-size:15px;}
+		tr td:first-child{font-size:11px;}
+
+		td.red {
+			color: red
+		}
+
+		td.blue {
+			color: blue;
+		}
+
+		h3 {
+			margin-top: 50px;
+		}
+
+		select {
+			border: none;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			background: #fff;
+			padding: 12px 10px;
+			width: 100%;
+			box-sizing: border-box;
+			font-size: 16px;
+			margin-bottom: 30px;
+		}
+
+		.colors {
+			overflow: hidden;
+			margin-bottom: 20px;
+		}
+
+		.colors .color {
+			display: inline-block;
+			border-radius: 50%;
+			width: 10px;
+			height: 10px;
+			margin-right: 5px;
+		}
+
+		.colors .color.red {
+			background: #EB7F75
+		}
+
+		.colors .color.yellow {
+			background: #FFDC73
+		}
+
+		.colors .color.blue {
+			background: #8FDAFF
+		}
+
+		.colors .label {
+			display: inline-block;
+			margin-right: 10px;
+			font-size: 12px;
+			color: #333;
+		}
+		.header{padding:8px 10px;position:fixed;width:100%;top:0;background:#fff;z-index:100;border-bottom:1px solid #f0f0f0;}
+		.header .nav{float:left;}
+		.header .dropdown{display:inline-block;float:right;position: absolute;right:10px}
+		.container{margin-top: 70px;}
+	</style>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-116931667-5"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-116931667-5');
+	</script>
+
+</head>
+
+<body>
+
+	<div class="header">
+		<ul class="nav" >
+			<li class="nav-item">
+				<a class="nav-link active" href="#">확진자 급등</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">미국 현황</a>
+			</li>
+		</ul>
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					언어
+				</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<a class="dropdown-item active" href="#">한국어</a>
+				<a class="dropdown-item" href="#">English</a>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div id="select-box"></div>
+		<div id="columnchart_confirmed"></div>
+		<div id="linechart_confirmed_increase"></div>
+		<div id="columnchart_death"></div>
+		<div id="columnchart_recovered"></div>
 		<div id="colors"></div>
 		<div id="report">
 		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script>
+		coronaReport('', '');
 
-		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-		<script>
-
-			coronaReport('','');
-
-			function coronaReport(ProvinceState,CountryRegion){
-				//console.log('onesunny3.cafe24.com/crawler/coronaDataApi.php?ProvinceState='+ProvinceState+'&CountryRegion='+CountryRegion);
+		function coronaReport(ProvinceState, CountryRegion) {
+			//console.log('onesunny3.cafe24.com/crawler/coronaDataApi.php?ProvinceState='+ProvinceState+'&CountryRegion='+CountryRegion);
 			$.ajax({
 				type: 'GET',
-				url:'coronaDataApi.php?ProvinceState='+ProvinceState+'&CountryRegion='+CountryRegion,
+				url: 'coronaDataApi.php?ProvinceState=' + ProvinceState + '&CountryRegion=' + CountryRegion,
 				contentType: false,
 				data: false,
 				processData: false,
-				success: function (data) {
+				success: function(data) {
 					isUploading = false;
 					var obj = JSON.parse(data);
 					//console.log(data);
 					var vodHTML = "";
 
-					if(obj.result =="success"){
-						var dataElmConfirmed =[]; //data Array for column chart
-						var dataElmDeath =[]; //data Array for column chart
-						var dataElmRecovered =[]; //data Array for column chart
-						var dataElmIncrease = [];//전체 데이터 위한 배열
-						var selectStr ='';
+					if (obj.result == "success") {
+						var dataElmConfirmed = []; //data Array for column chart
+						var dataElmDeath = []; //data Array for column chart
+						var dataElmRecovered = []; //data Array for column chart
+						var dataElmIncrease = []; //전체 데이터 위한 배열
+						var selectStr = '';
 						var countryList = obj.data.countryList;
 						var countryData = obj.data.countryData;
 						var countryListLength = countryList.length;
-						selectStr +='<h3>국가별 검색 search by country</h3>'
-						selectStr +='<select id="countryList">';
-							selectStr+='<option>select Region(confirmed count)</option>';
-						for(var i =0;i<countryListLength;i++){
-							if(countryList[i]['ProvinceState']==ProvinceState&&countryList[i]['CountryRegion']==CountryRegion){
-								selectStr+='<option  selected value="'+countryList[i]['ProvinceState']+'@'+countryList[i]['CountryRegion']+'">'+countryList[i]['ProvinceState']+'['+countryList[i]['CountryRegion']+']('+countryList[i]['cnt']+')</option>';
-							}else{
-								selectStr+='<option value="'+countryList[i]['ProvinceState']+'@'+countryList[i]['CountryRegion']+'">'+countryList[i]['ProvinceState']+'['+countryList[i]['CountryRegion']+']('+countryList[i]['cnt']+')</option>';
+						selectStr += '<h5>국가별 검색</h5>'
+						selectStr += '<select id="countryList">';
+						selectStr += '<option>나라를 선택하세요(확진자 수)</option>';
+						for (var i = 0; i < countryListLength; i++) {
+							if (countryList[i]['ProvinceState'] == ProvinceState && countryList[i]['CountryRegion'] == CountryRegion) {
+								selectStr += '<option  selected value="' + countryList[i]['ProvinceState'] + '@' + countryList[i]['CountryRegion'] + '">' + countryList[i]['ProvinceState'] + '[' + countryList[i]['CountryRegion'] + '](' + countryList[i]['cnt'] +
+									')</option>';
+							} else {
+								selectStr += '<option value="' + countryList[i]['ProvinceState'] + '@' + countryList[i]['CountryRegion'] + '">' + countryList[i]['ProvinceState'] + '[' + countryList[i]['CountryRegion'] + '](' + countryList[i]['cnt'] + ')</option>';
 							}
 
 						}
-						selectStr+='</select>';
-						var conditionStr='';
-						var reportStr ='';
+						selectStr += '</select>';
+						var conditionStr = '';
+						var reportStr = '';
 						//console.log(countryData);
-						if(countryData ==null){
-							reportStr+='<h3>지역명(확진자 수)</h3>';
-							reportStr+='지역은 확진자 많은 순으로 정렬되어있습니다.';
-
+						if (countryData == null) {
+							reportStr += '<div class="alert alert-info" role="alert">';
+							  reportStr += '지역은 확진자 많은 순으로 정렬되어있습니다!';
+							reportStr += '</div>';
 						}
-						if(countryData !=null){
-							var countryDataLength =  countryData.length;
+						if (countryData != null) {
+							var countryDataLength = countryData.length;
 							//console.log( countryDataLength );
-							reportStr+='<h3>'+ProvinceState+'['+CountryRegion+']</h3>';
+							reportStr += '<h5>' + ProvinceState + '[' + CountryRegion + ']</h5>';
 							//reportStr+='<p>order by confirmed count desc</p>';
-							reportStr+='<table>';
-								reportStr+='<col width="60px">';
-								reportStr+='<col width="10px">';
-								reportStr+='<col width="10px">';
-								reportStr+='<col width="10px">';
-								reportStr+='<col width="10px">';
-								reportStr +='<thead><tr>';
-									reportStr+='<th>DataDate</th>';
-									//reportStr+='<th>ProvinceState</th>';
-									//reportStr+='<th>CountryRegion</th>';
-									reportStr+='<th>Confirmed</th>';
-									reportStr+='<th>Increase</th>';
-									reportStr+='<th>Deaths</th>';
-									reportStr+='<th>Recovered</th>';
-								reportStr+='</tr></thead>';
-								reportStr+='<tbody>';
-							for(var i=0;i<countryDataLength;i++){
+							reportStr += '<table class="table table-hover">';
+							reportStr += '<col width="60px">';
+							reportStr += '<col width="10px">';
+							reportStr += '<col width="10px">';
+							reportStr += '<col width="10px">';
+							reportStr += '<col width="10px">';
+							reportStr += '<thead class="thead-dark"><tr>';
+							reportStr += '<th scope="col">날짜</th>';
+							//reportStr+='<th>ProvinceState</th>';
+							//reportStr+='<th>CountryRegion</th>';
+							reportStr += '<th scope="col">확진</th>';
+							reportStr += '<th scope="col">전일대비 증가</th>';
+							reportStr += '<th scope="col">사망</th>';
+							reportStr += '<th scope="col">회복</th>';
+							reportStr += '</tr></thead>';
+							reportStr += '<tbody>';
+							for (var i = 0; i < countryDataLength; i++) {
 
-								reportStr+='<tr>';
-									reportStr+='<td>'+countryData [i]['DataDate']+'</td>';
-									//reportStr+='<td>'+countryData [i]['ProvinceState']+'</td>';
-									//reportStr+='<td>'+countryData [i]['CountryRegion']+'</td>';
-									reportStr+='<td>'+countryData [i]['Confirmed']+'</td>';
-									if(countryData [i]['Increase']>0){
-									reportStr+='<td class="red">+'+countryData [i]['Increase']+'</td>';
-									}else{
-									reportStr+='<td class="blue">+'+countryData [i]['Increase']+'</td>';
-									}
-									reportStr+='<td>'+countryData [i]['Deaths']+'</td>';
-									reportStr+='<td>'+countryData [i]['Recovered']+'</td>';
-								reportStr+='</tr>';
+								reportStr += '<tr>';
+								reportStr += '<td>' + countryData[i]['DataDate'] + '</td>';
+								//reportStr+='<td>'+countryData [i]['ProvinceState']+'</td>';
+								//reportStr+='<td>'+countryData [i]['CountryRegion']+'</td>';
+								reportStr += '<td>' + countryData[i]['Confirmed'] + '</td>';
+								if (countryData[i]['Increase'] > 0) {
+									reportStr += '<td class="red">+' + countryData[i]['Increase'] + '</td>';
+								} else {
+									reportStr += '<td class="blue">+' + countryData[i]['Increase'] + '</td>';
+								}
+								reportStr += '<td>' + countryData[i]['Deaths'] + '</td>';
+								reportStr += '<td>' + countryData[i]['Recovered'] + '</td>';
+								reportStr += '</tr>';
 
 								//tempData = [countryData [i]['DataDate'], countryData [i]['Confirmed']];
 
-								tempDataConfirmed = [countryData [i]['DataDate'], countryData [i]['Confirmed']]; //array push for column chart
-								tempDataDeath = [countryData [i]['DataDate'], countryData [i]['Deaths']]; //array push for column chart
-								tempDataRecovered = [countryData [i]['DataDate'], countryData [i]['Recovered']]; //array push for column chart
-								tempDataIncrease =  [countryData [i]['DataDate'], countryData [i]['Increase']]; //array push for column chart
-								dataElmConfirmed.unshift(tempDataConfirmed);//array push for column chart
-								dataElmDeath.unshift(tempDataDeath);//array push for column chart
-								dataElmRecovered.unshift(tempDataRecovered);//array push for column chart
-								dataElmIncrease.unshift(tempDataIncrease);//array push for column chart
+								tempDataConfirmed = [countryData[i]['DataDate'], countryData[i]['Confirmed'] != 0 ? countryData[i]['Confirmed'] : '']; //array push for column chart
+								tempDataDeath = [countryData[i]['DataDate'], countryData[i]['Deaths'] != 0 ? countryData[i]['Deaths'] : '']; //array push for column chart
+								tempDataRecovered = [countryData[i]['DataDate'], countryData[i]['Recovered'] != 0 ? countryData[i]['Recovered'] : '']; //array push for column chart
+								tempDataIncrease = [countryData[i]['DataDate'], countryData[i]['Increase']]; //array push for column chart
+								dataElmConfirmed.unshift(tempDataConfirmed); //array push for column chart
+								dataElmDeath.unshift(tempDataDeath); //array push for column chart
+								dataElmRecovered.unshift(tempDataRecovered); //array push for column chart
+								dataElmIncrease.unshift(tempDataIncrease); //array push for column chart
 
 							}
-							reportStr+='</tbody>';
-							reportStr+='</table>';
+							reportStr += '</tbody>';
+							reportStr += '</table>';
 
-							conditionStr +='<div class="colors">';
-								conditionStr+='<div class="color red"></div><div class="label">Confirmed Count</div>';
-								conditionStr+='<div class="color yellow"></div><div class="label">Death Count</div>';
-								conditionStr+='<div class="color blue"></div><div class="label">Recovered Count</div>';
-							conditionStr+='</div>'
+							conditionStr += '<div class="colors">';
+							conditionStr += '<div class="color red"></div><div class="label">Confirmed Count</div>';
+							conditionStr += '<div class="color yellow"></div><div class="label">Death Count</div>';
+							conditionStr += '<div class="color blue"></div><div class="label">Recovered Count</div>';
+							conditionStr += '</div>'
 						}
-
-						$('#report').html(selectStr+reportStr);
+						$('#select-box').html(selectStr);
+						$('#report').html(reportStr);
 						$('#colors').html(conditionStr);
 						//console.log(dataCorona);
 						//console.log(dataElm);
 
 						//var tempData =['DateDate', 'Confirmed'];
-						var tempDataConfirmed =['DateDate', 'Confirmed'];
-						var tempDataDeath =['DateDate','Deaths'];
-						var tempDataRecovered =['DateDate', 'Recovered'];
-						var tempDataIncrease =['DateDate', 'Increase'];
-						dataElmConfirmed.unshift(tempDataConfirmed);//array push for column chart
-						dataElmDeath.unshift(tempDataDeath);//array push for column chart
-						dataElmRecovered.unshift(tempDataRecovered);//array push for column chart
-						dataElmIncrease.unshift(tempDataIncrease);//array push for column chart
+						var tempDataConfirmed = ['DateDate', 'Confirmed'];
+						var tempDataDeath = ['DateDate', 'Deaths'];
+						var tempDataRecovered = ['DateDate', 'Recovered'];
+						var tempDataIncrease = ['DateDate', 'Increase'];
+						dataElmConfirmed.unshift(tempDataConfirmed); //array push for column chart
+						dataElmDeath.unshift(tempDataDeath); //array push for column chart
+						dataElmRecovered.unshift(tempDataRecovered); //array push for column chart
+						dataElmIncrease.unshift(tempDataIncrease); //array push for column chart
 
-						if(countryData !=null){
-						  google.charts.load('current', {'packages':['bar']});
-						  google.charts.setOnLoadCallback(drawConfirmedChart);
+						if (countryData != null) {
+							google.charts.load('current', {
+								'packages': ['bar']
+							});
+							google.charts.setOnLoadCallback(drawConfirmedChart);
 							google.charts.setOnLoadCallback(drawDeathChart);
 							google.charts.setOnLoadCallback(drawRecoveredChart);
-							google.charts.load('current', {packages: ['corechart', 'line']});
+							google.charts.load('current', {
+								packages: ['corechart', 'line']
+							});
 							google.charts.setOnLoadCallback(drawIncreaseChart);
 						}
 
-						  function drawConfirmedChart() {
+						function drawConfirmedChart() {
 
-							 var data = google.visualization.arrayToDataTable(dataElmConfirmed);
+							var data = google.visualization.arrayToDataTable(dataElmConfirmed);
 
 							//https://developers.google.com/chart/interactive/docs/gallery/piechart?hl=ko#Configuration_Options
 							//collumn chart customization - options
 							//=>https://developers.google.com/chart/interactive/docs/gallery/columnchart
 
 							var options = {
-								title:'확진자 누적수',
-								legend: { position: "none"},
+								title: '확진자 누적수',
+								legend: {
+									position: "none"
+								},
 								chart: {
 
 									//title: 'Company Performance',
 									//subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-								  },
-							   colors: ['#EB7F75'],
-							   vAxis: {
-									 viewWindowMode:'explicit',
-									 viewWindow:{
-										 min:0,
-									 },
-									 mainValue:0,
-									 gridlines: { color: '#f0f0f0',count:-1}
-								 },
+								},
+								colors: ['#EB7F75'],
+								vAxis: {
+									viewWindowMode: 'explicit',
+									viewWindow: {
+										min: 0,
+									},
+									minValue: 0,
+									gridlines: {
+										color: '#f0f0f0',
+										count: -1
+									}
+								},
+								hAxis: {
+									viewWindow: {
+										min: 0,
+									},
+									minValue: 0
+								},
+								height: 400,
 							};
 
 							var chart = new google.charts.Bar(document.getElementById('columnchart_confirmed'));
 
 							chart.draw(data, google.charts.Bar.convertOptions(options));
-						  }
+						}
 
-							function drawDeathChart() {
+						function drawDeathChart() {
 
-							 var data = google.visualization.arrayToDataTable(dataElmDeath);
+							var data = google.visualization.arrayToDataTable(dataElmDeath);
 
 							//https://developers.google.com/chart/interactive/docs/gallery/piechart?hl=ko#Configuration_Options
 							//collumn chart customization - options
 							//=>https://developers.google.com/chart/interactive/docs/gallery/columnchart
 
 							var options = {
-								title:'사망자 누적수',
-								legend: { position: "none"},
+								title: '사망자 누적수',
+								legend: {
+									position: "none"
+								},
 								chart: {
 
 									//title: 'Company Performance',
 									//subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-								  },
-							   colors: ['#FFDC73'],
-							   vAxis: { gridlines: { color: '#f0f0f0', minSpacing: 20,count:-1}},
+								},
+								colors: ['#FFDC73'],
+								vAxis: {
+									viewWindowMode: 'explicit',
+									viewWindow: {
+										min: 0,
+									},
+									minValue: 0,
+									gridlines: {
+										color: '#f0f0f0'
+									}
+								},
+								hAxis: {
+									viewWindow: {
+										min: 0,
+									},
+									minValue: 0
+								},
+								height: 400,
 							};
 
 							var chart = new google.charts.Bar(document.getElementById('columnchart_death'));
 
 							chart.draw(data, google.charts.Bar.convertOptions(options));
-						  }
+						}
 
-							function drawRecoveredChart() {
+						function drawRecoveredChart() {
 
-							 var data = google.visualization.arrayToDataTable(dataElmRecovered);
+							var data = google.visualization.arrayToDataTable(dataElmRecovered);
 
 							//https://developers.google.com/chart/interactive/docs/gallery/piechart?hl=ko#Configuration_Options
 							//collumn chart customization - options
 							//=>https://developers.google.com/chart/interactive/docs/gallery/columnchart
 
 							var options = {
-								title :'회복자 누적수',
-								legend: { position: "none"},
+								title: '회복자 누적수',
+								legend: {
+									position: "none"
+								},
 								chart: {
 
 									//title: 'Company Performance',
 									//subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-								  },
-							   colors: ['#8FDAFF'],//
-							   vAxis: { gridlines: { color: '#f0f0f0', minSpacing: 20,count:-1}},
+								},
+								colors: ['#8FDAFF'], //
+								vAxis: {
+									gridlines: {
+										color: '#f0f0f0',
+										minSpacing: 20,
+										count: -1
+									}
+								},
+								height: 400,
 							};
 
 							var chart = new google.charts.Bar(document.getElementById('columnchart_recovered'));
 
 							chart.draw(data, google.charts.Bar.convertOptions(options));
-						  }
+						}
 
-							function drawIncreaseChart() {
+						function drawIncreaseChart() {
 
-					      //var data = new google.visualization.DataTable();
-								var data = google.visualization.arrayToDataTable(dataElmIncrease);
+							//var data = new google.visualization.DataTable();
+							var data = google.visualization.arrayToDataTable(dataElmIncrease);
 
-					      var options = {
-									title:'일별 확진자 증가수',
-									colors: ['#EB7F75'],
-									legend: { position: "none"},
-					        hAxis: {
-					          title: 'Time'
-					        },
-					        vAxis: {
-					          title: 'daily increase(confirmed)'
-					        }
-					      };
+							var options = {
+								title: '일별 확진자 증가수',
+								colors: ['#EB7F75'],
+								legend: {
+									position: "none"
+								},
+								hAxis: {
+									title: 'Time'
+								},
+								vAxis: {
+									title: 'daily increase(confirmed)'
+								},
+								height: 400,
+							};
 
-					      var chart = new google.visualization.LineChart(document.getElementById('linechart_confirmed_increase'));
+							var chart = new google.visualization.LineChart(document.getElementById('linechart_confirmed_increase'));
 
-					      chart.draw(data, options);
-					    }
+							chart.draw(data, options);
+						}
 
 						//내부함수
-						$(function(){
-							$('#countryList').change(function(){
+						$(function() {
+							$('#countryList').change(function() {
 								//console.log(this.value);
 								var regionArray = this.value.split('@');
-								coronaReport(regionArray [0],regionArray [1]);
+								coronaReport(regionArray[0], regionArray[1]);
 							});
 						});
 
@@ -297,6 +442,7 @@
 
 
 		}
-		</script>
-	</body>
+	</script>
+</body>
+
 </html>
