@@ -4,11 +4,13 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>corona not beer</title>
+	<title>Corona19 not Beer</title>
 	<meta property="og:image" content="http://13.58.243.149/corona/corona.jpg" />
 	<meta property="og:url" content="http://13.58.243.149/corona/report" />
 	<meta property="og:description" content="corona daily report-confirmed,deaths,recovery" />
 	<meta property="og:title" content="Corona Not Beer" />
+	<!-- CSS sheet -->
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -17,90 +19,10 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-	<style>
-		table {
-			border: 1px solid #444;
-			border-collapse: collapse;
-			margin-top: 30px;
-			width: 100%;
-		}
-
-		th,
-		td {
-			border: 1px solid #ccc;
-			padding: 10px;
-			word-break: break-all;
-			font-size: 10px;
-			text-align: center;
-		}
-		td{font-size:15px;}
-		tr td:first-child{font-size:11px;}
-
-		td.red {
-			color: red
-		}
-
-		td.blue {
-			color: blue;
-		}
-
-		h3 {
-			margin-top: 50px;
-		}
-
-		select {
-			border: none;
-			border: 1px solid #ccc;
-			border-radius: 5px;
-			background: #fff;
-			padding: 12px 10px;
-			width: 100%;
-			box-sizing: border-box;
-			font-size: 16px;
-			margin-bottom: 30px;
-		}
-
-		.colors {
-			overflow: hidden;
-			margin-bottom: 20px;
-		}
-
-		.colors .color {
-			display: inline-block;
-			border-radius: 50%;
-			width: 10px;
-			height: 10px;
-			margin-right: 5px;
-		}
-
-		.colors .color.red {
-			background: #EB7F75
-		}
-
-		.colors .color.yellow {
-			background: #FFDC73
-		}
-
-		.colors .color.blue {
-			background: #8FDAFF
-		}
-
-		.colors .label {
-			display: inline-block;
-			margin-right: 10px;
-			font-size: 12px;
-			color: #333;
-		}
-		.header{padding:8px 10px;position:fixed;width:100%;top:0;background:#fff;z-index:100;border-bottom:1px solid #f0f0f0;}
-		.header .nav{float:left;}
-		.header .dropdown{display:inline-block;float:right;position: absolute;right:10px}
-		.container{margin-top: 70px;}
-	</style>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-116931667-5"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
-
 		function gtag() {
 			dataLayer.push(arguments);
 		}
@@ -124,22 +46,50 @@
 		</ul>
 		<div class="dropdown">
 			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					언어
+					Language
 				</button>
 			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				<a class="dropdown-item active" href="#">한국어</a>
 				<a class="dropdown-item" href="#">English</a>
+				<a class="dropdown-item active" href="#">한국어</a>
 			</div>
 		</div>
 	</div>
 	<div class="container">
-		<div id="select-box"></div>
-		<div id="columnchart_confirmed"></div>
-		<div id="linechart_confirmed_increase"></div>
-		<div id="columnchart_death"></div>
-		<div id="columnchart_recovered"></div>
-		<div id="colors"></div>
-		<div id="report">
+		<div class="mb-0 py-5 p-3 bg-light d-flex flex-column">
+        <h3>COVID19 in US real time update</h3>
+    </div>
+		<div class="row">
+			<div class="col-3">
+        <div class="mt-5 mb-3 sticky-top" id="side">
+					<!-- https://www.codeply.com/go/PYSH1maRVO/bootstrap-4-nav-sticky-sidebar-scrollspy -->
+            <ul class="nav flex-md-column flex-row justify-content-between" id="sidenav">
+                <li class="nav-item"><a href="#sec1" class="nav-link pl-0">What is corona</a></li>
+                <li class="nav-item"><a href="#sec2" class="nav-link pl-0">How to prevent</a></li>
+                <li class="nav-item">
+                    <a href="#sec3" class="nav-link pl-0">World map</a>
+                    <ul class="nav flex-md-column ml-2">
+                        <li class="nav-item"><a href="#sec3a" class="nav-link">General</a></li>
+                        <li class="nav-item"><a href="#sec3b" class="nav-link">China</a></li>
+												<li class="nav-item"><a href="#sec3c" class="nav-link">EMEA</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="#sec4" class="nav-link pl-0">Travel restrictions</a></li>
+                <li class="nav-item"><a href="#sec5" class="nav-link pl-0">Sources</a></li>
+                <li class="nav-item"><a href="#sec6" class="nav-link pl-0">Summary</a></li>
+								<li class="nav-item"><a href="#sec7" class="nav-link pl-0">FAQ</a></li>
+								<li class="nav-item"><a href="#sec8" class="nav-link pl-0">대상별 맞춤 정보</a></li>
+            </ul>
+        </div>
+			</div>
+			<div class="col-9">
+				<div id="select-box"></div>
+				<div id="columnchart_confirmed"></div>
+				<div id="linechart_confirmed_increase"></div>
+				<div id="columnchart_death"></div>
+				<div id="columnchart_recovered"></div>
+				<div id="colors"></div>
+				<div id="report"></div>
+			</div>
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
